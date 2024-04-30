@@ -1,4 +1,3 @@
-// Inicio utils.js
 class Utils {
 
     constructor({ width = 400, height = 400, r = 0.1, g = 0.2, b = 0.3, a = 0.4 } = {}) {

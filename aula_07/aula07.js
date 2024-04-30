@@ -66,12 +66,6 @@ utils.initBuffer({ vertices });
 
 utils.linkBuffer({ variable: "aPosition", reading: 3 });
 
-/* utils.initBuffer({ vertices: colors });
-
-utils.linkBuffer({ variable: "aColor", reading: 3 }); */
-
-
-
 var projectionOrthoMatrix = mat4.create();
 
 var size = 1; // Metade da largura/altura total desejada
@@ -143,6 +137,62 @@ textura2.onload = function () {
 }
 textura2.src = 'texturas/LateRegistration.jpg';
 
+let texture3 = gl.createTexture();
+
+var textura3 = new Image();
+textura3.onload = function () {
+    // Configuraremos a textura1 aqui.
+    gl.bindTexture(gl.TEXTURE_2D, texture3)
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, textura3)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
+}
+textura3.src = 'texturas/Graduation.jpg';
+
+let texture4 = gl.createTexture();
+
+var textura4 = new Image();
+textura4.onload = function () {
+    // Configuraremos a textura1 aqui.
+    gl.bindTexture(gl.TEXTURE_2D, texture4)
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, textura4)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
+}
+textura4.src = 'texturas/MBDTF.jpg';
+
+let texture5 = gl.createTexture();
+
+var textura5 = new Image();
+textura5.onload = function () {
+    // Configuraremos a textura1 aqui.
+    gl.bindTexture(gl.TEXTURE_2D, texture5)
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, textura5)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
+}
+textura5.src = 'texturas/TheLifeOfPablo.jpg';
+
+let texture6 = gl.createTexture();
+
+var textura6 = new Image();
+textura6.onload = function () {
+    // Configuraremos a textura1 aqui.
+    gl.bindTexture(gl.TEXTURE_2D, texture6)
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, textura6)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
+}
+textura6.src = 'texturas/Vultures.jpg';
+
 let textureCoordinates = [
     // 0
     0.0, 0.0, 1.0, 0.0, 1.0, 1.0,
@@ -169,51 +219,60 @@ utils.linkBuffer({ reading: 2, variable: "texCoords" })
 
 
 function render() {
+    // Atualizar e vincular as texturas
     gl.activeTexture(gl.TEXTURE0)
     gl.bindTexture(gl.TEXTURE_2D, textura1)
     gl.activeTexture(gl.TEXTURE1)
     gl.bindTexture(gl.TEXTURE_2D, texture2)
+    gl.activeTexture(gl.TEXTURE2)
+    gl.bindTexture(gl.TEXTURE_2D, texture3)
+    gl.activeTexture(gl.TEXTURE3)
+    gl.bindTexture(gl.TEXTURE_2D, texture4)
+    gl.activeTexture(gl.TEXTURE4)
+    gl.bindTexture(gl.TEXTURE_2D, texture5)
+    gl.activeTexture(gl.TEXTURE5)
+    gl.bindTexture(gl.TEXTURE_2D, texture6)
 
     theta[0] += transform_x;
     theta[1] += transform_y;
     theta[2] += transform_z;
 
     utils.linkUniformVariable({ shaderName: "theta", value: theta, kind: "3fv" });
-    utils.linkUniformVariable({ shaderName: "uSampler", value: 1, kind: "1i" })
-    // 1
+
+    utils.linkUniformVariable({ shaderName: "uSampler", value: 0, kind: "1i" })
     utils.linkUniformMatrix({ shaderName: "uViewMatrix", value: viewMatrixFront, kind: "4fv" });
     utils.drawScene({ method: "TRIANGLES", viewport: { x: 0, y: sceneSize, width: sceneSize, height: sceneSize } });
-    // 2
+
+    utils.linkUniformVariable({ shaderName: "uSampler", value: 1, kind: "1i" })
     utils.linkUniformMatrix({ shaderName: "uViewMatrix", value: viewMatrixTop, kind: "4fv" });
     utils.drawScene({ method: "TRIANGLES", viewport: { x: sceneSize, y: sceneSize, width: sceneSize, height: sceneSize } });
-    // 3
-    utils.linkUniformVariable({ shaderName: "uSampler", value: 0, kind: "1i" })
+
+
+    utils.linkUniformVariable({ shaderName: "uSampler", value: 2, kind: "1i" })
     utils.linkUniformMatrix({ shaderName: "uViewMatrix", value: viewMatrixSide, kind: "4fv" });
     utils.linkUniformMatrix({ shaderName: "uViewMatrix", value: viewMatrixFrontSide, kind: "4fv" });
-
-    //Correção do erro que gerava um espaço vazio nesse viewport
-    let viewport3X = sceneSize; //
-    let viewport3Y = 0; 
+    let viewport3X = sceneSize;
+    let viewport3Y = 0;
     let viewport3Width = sceneSize;
-    let viewport3Height = sceneSize; 
+    let viewport3Height = sceneSize;
+    utils.drawScene({ method: "TRIANGLES", viewport: { x: viewport3X, y: viewport3Y, width: viewport3Width, height: viewport3Height } });
 
-    utils.drawScene({method: "TRIANGLES",viewport: {x: viewport3X,y: viewport3Y,width: viewport3Width,height: viewport3Height}});
-    // 4
+    utils.linkUniformVariable({ shaderName: "uSampler", value: 3, kind: "1i" })
     utils.linkUniformMatrix({ shaderName: "uViewMatrix", value: viewMatrixIsometric, kind: "4fv" });
-    //Correção do erro que gerava um espaço vazio nesse viewport gerada pela correção do erro anterior
-    let viewport4X = 0; 
-    let viewport4Y = 0; 
-    let viewport4Width = sceneSize; 
-    let viewport4Height = sceneSize; 
+    let viewport4X = 0;
+    let viewport4Y = 0;
+    let viewport4Width = sceneSize;
+    let viewport4Height = sceneSize;
+    utils.drawScene({ method: "TRIANGLES", viewport: { x: viewport4X, y: viewport4Y, width: viewport4Width, height: viewport4Height } });
 
-    utils.drawScene({ method: "TRIANGLES",viewport: { x: viewport4X,y: viewport4Y,width: viewport4Width, height: viewport4Height}});
-    // 5
+    utils.linkUniformVariable({ shaderName: "uSampler", value: 4, kind: "1i" })
     utils.linkUniformMatrix({ shaderName: "uViewMatrix", value: viewMatrixAdcional1, kind: "4fv" });
     utils.drawScene({ method: "TRIANGLES", viewport: { x: 2 * sceneSize, y: 0, width: sceneSize, height: sceneSize } });
-    //6
+
+
+    utils.linkUniformVariable({ shaderName: "uSampler", value: 5, kind: "1i" })
     utils.linkUniformMatrix({ shaderName: "uViewMatrix", value: viewMatrixAdcional2, kind: "4fv" });
     utils.drawScene({ method: "TRIANGLES", viewport: { x: 2 * sceneSize, y: sceneSize, width: sceneSize, height: sceneSize } });
-
 
     window.setTimeout(render, speed);
 }

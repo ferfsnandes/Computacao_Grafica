@@ -1,4 +1,4 @@
-var sceneSize = 300
+var sceneSize = 430
 let utils = new Utils({ width: sceneSize * 3, height: sceneSize * 2, a: 0.0});
 
 let vertices = [];
@@ -16,25 +16,26 @@ let cubeVertices = [
 ];
 
 let textureCoordinates = [
-    // 0
+    // Front face
     0.0, 0.0, 1.0, 0.0, 1.0, 1.0,
     0.0, 0.0, 1.0, 1.0, 0.0, 1.0,
-    // 1
+    // Top face
     0.0, 0.0, 1.0, 0.0, 1.0, 1.0,
     0.0, 0.0, 1.0, 1.0, 0.0, 1.0,
-    // 2
+    // Side face
     0.0, 0.0, 1.0, 0.0, 1.0, 1.0,
     0.0, 0.0, 1.0, 1.0, 0.0, 1.0,
-    // 3
+    // Bottom face
     0.0, 0.0, 1.0, 0.0, 1.0, 1.0,
     0.0, 0.0, 1.0, 1.0, 0.0, 1.0,
-    // 4
+    // Back face
     0.0, 0.0, 1.0, 0.0, 1.0, 1.0,
     0.0, 0.0, 1.0, 1.0, 0.0, 1.0,
-    // 5
+    // Bottom face
     0.0, 0.0, 1.0, 0.0, 1.0, 1.0,
-    0.0, 0.0, 1.0, 1.0, 0.0, 1.0,
-]
+    0.0, 0.0, 1.0, 1.0, 0.0, 1.0
+];
+
 
 function makeFace(v1, v2, v3, v4) {
     let triangulos = [];
@@ -102,6 +103,7 @@ utils.initShader({
                     void main(){
                         fColor = texture(uSampler, textureCoords);
                     }`
+                    
 });
 
 utils.initBuffer({ vertices });
@@ -168,12 +170,12 @@ var viewMatrixIsometric2 = mat4.create();
 mat4.lookAt(viewMatrixIsometric2, [5, -5, 5], [0, 0, 0], [0, 1, 0]);
 
 let textures = [
-    startupTexture("texturas/TheCollegeDropout.jpg"),      
-    startupTexture("texturas/LateRegistration,jpg"),             
-    startupTexture("texturas/Graduation.jpg"),            
-    startupTexture("texturas/MBDTF.jpg"),    
-    startupTexture("texturas/TheLifeOfPablo.jpg"),  
-    startupTexture("texturas/Vultures.jpg")         
+    startupTexture('texturas/TheCollegeDropout.jpg'),      
+    startupTexture('texturas/LateRegistration.jpg'),             
+    startupTexture('texturas/Graduation.jpg'),            
+    startupTexture('texturas/MBDTF.jpg'),    
+    startupTexture('texturas/TheLifeOfPablo.jpg'),  
+    startupTexture('texturas/Vultures.jpg')         
 ];
 
 activateTextures(textures)
@@ -208,8 +210,7 @@ function render() {
     utils.linkUniformMatrix({ shaderName: "uViewMatrix", value: viewMatrixSide, kind: "4fv" });
     utils.drawScene({ method: "TRIANGLES", viewport: { x: sceneSize * 2, y: 0, width: sceneSize, height: sceneSize } });
 
-    utils.linkUniformVariable({shaderName:"uSampler", value:3, kind:"1i"})
-
+    utils.linkUniformVariable({shaderName:"uSampler", value:3, kind:"1i"});
     utils.linkUniformMatrix({ shaderName: "uViewMatrix", value: viewMatrixFrontSide, kind: "4fv" });
     utils.drawScene({ method: "TRIANGLES", viewport: { x: 0, y: sceneSize, width: sceneSize, height: sceneSize } });
     

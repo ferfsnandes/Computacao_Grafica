@@ -129,7 +129,7 @@ void main(){
         this.gl.enable(this.gl.SCISSOR_TEST);
         this.gl.scissor(viewport.x, viewport.y, viewport.width,
             viewport.height);
-        this.gl.clearColor(0.1, 0.2, 0.3, 0.4)
+        this.gl.clearColor(this.r, this.g, this.b, this.a)
         this.gl.clear(this.gl.DEPTH_BUFFER_BIT | this.gl.COLOR_BUFFER_BIT);
         this.gl.disable(this.gl.SCISSOR_TEST);
         this.gl.viewport(viewport.x, viewport.y, viewport.width,

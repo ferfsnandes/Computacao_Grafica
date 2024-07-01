@@ -1,0 +1,70 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title> ATT 06 </title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <canvas id="canvas">
+    Infelizmente, o seu browser não dá suporte ao elemento Canvas
+    ,→ do HTML5.
+  </canvas>
+
+  <div class="controls">
+    <div class="control">
+      <label for="spd-slider"> Velocidade: <span id="speed-value"> 20 </span> </label>
+      <input type="range" name="spd-slider" id="spd-slider" min="-1000" max="0" value="-10">
+    </div>
+    <div class="control">
+      <label for="rotation-x"> Rotação X: <span id="rotation-x-direction"> Parada </span> </label>
+      <div class="btns" id="rotation-x">
+        <button name="rotation-btn-ctrl" id="change-rotation-x-btn"> Mudar Direção da Rotação X </button>
+        <button name="rotation-btn-ctrl" id="start-rotation-x-btn"> Iniciar Rotação X </button>
+        <button name="rotation-btn-ctrl" id="stop-rotation-x-btn"> Parar Rotação X </button>
+      </div>
+    </div>
+    <div class="control">
+      <label for="rotation-y"> Rotação Y: <span id="rotation-y-direction"> Parada</span> </label>
+      <div class="btns" id="rotation-y">
+        <button name="rotation-btn-ctrl" id="change-rotation-y-btn"> Mudar Direção da Rotação Y </button>
+        <button name="rotation-btn-ctrl" id="start-rotation-y-btn"> Iniciar Rotação Y </button>
+        <button name="rotation-btn-ctrl" id="stop-rotation-y-btn"> Parar Rotação Y </button>
+      </div>
+    </div>
+    <div class="control">
+      <label for="rotation-z"> Rotação Z: <span id="rotation-z-direction"> Parada </span> </label>
+      <div class="btns" id="rotation-z">
+        <button name="rotation-btn-ctrl" id="change-rotation-z-btn"> Mudar Direção da Rotação Z </button>
+        <button name="rotation-btn-ctrl" id="start-rotation-z-btn"> Iniciar Rotação Z </button>
+        <button name="rotation-btn-ctrl" id="stop-rotation-z-btn"> Parar Rotação Z </button>
+      </div>
+    </div>
+    <div class="control">
+      <label for="scale"> Mudança de escala: <span id="scale-direction"> Parada </span> </label>
+      <div class="btns" id="scale">
+        <button name="scale-btn-ctrl" id="change-scale-btn"> Mudar Sentido da Escala </button>
+        <button name="scale-btn-ctrl" id="start-scale-btn"> Iniciar Mudança de Escala </button>
+        <button name="scale-btn-ctrl" id="stop-scale-btn"> Parar Mudança de Escala </button>
+      </div>
+    </div>
+    <div class="control">
+      <label for="translation"> Translação: <span id="translation-direction"> Parada </span> </label>
+      <div class="btns" id="translation">
+        <button name="translation-btn-ctrl" id="change-translation-btn"> Mudar Sentido da Translação </button>
+        <button name="translation-btn-ctrl" id="start-translation-btn"> Iniciar Translação </button>
+        <button name="translation-btn-ctrl" id="stop-translation-btn"> Parar Translação </button>
+      </div>
+    </div>
+
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/gl-matrix@2.8.1/dist/gl-matrix-min.js"></script>
+<script type="text/javascript" defer src="controls.js"></script>
+<script type="text/javascript" defer src="utils.js"></script>
+<script type="text/javascript" defer src="att_7_alt.js"></script>
+
+</html>
